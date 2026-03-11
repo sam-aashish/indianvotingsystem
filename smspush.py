@@ -17,9 +17,11 @@ def fetch_voters_with_votes():
 # Function to send SMS notification
 def send_sms_notification(voter_name, voter_mobile_number):
     # Twilio credentials
-    account_sid = 'ACc39c3f4e6d8b68303c8fb021f76745cb'
-    auth_token = 'b0eb000b8aa8789952c77d4af39e4bcf'
-    twilio_sender = '+17069204094'
+    import os
+
+account_sid = os.getenv("TWILIO_ACCOUNT_SID")
+auth_token = os.getenv("TWILIO_AUTH_TOKEN")
+twilio_sender = os.getenv("TWILIO_PHONE_NUMBER")
 
     # Initialize Twilio client
     client = Client(account_sid, auth_token)
@@ -43,3 +45,4 @@ def send_verification_sms():
         voter_mobile_number = voter[3]  # Assuming mobile number is stored in the fourth column
         voter_name = voter[4]
         send_sms_notification(voter_name, voter_mobile_number)
+
